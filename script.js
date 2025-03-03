@@ -1,7 +1,9 @@
+import API_KEY from "./config.js";
+
 fetch("https://api.themoviedb.org/3/trending/movie/week", {
     headers: {
         accept: "application/json",
-        Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNmIzNjM3NTc1MzI5ZWJlOGJhZGI4MzY0YjUzYjNmOSIsIm5iZiI6MTc0MDk5MzUyNy43LCJzdWIiOiI2N2M1NzNmN2RiMDUwODI0OGE3YTc1NzUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.RBNCGQM-v95Io-w_Y_GaLddsrrL5s6W1tx5UwkwHP0k"
+        Authorization: `Bearer ${API_KEY}`
     }
 })
 .then(response => response.json())

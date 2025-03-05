@@ -5,12 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyMovie</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <script type="module" src="script.js"></script>
-
+    <script src="script.js" defer type="module"></script>
 </head>
 <body>
-    <h1>Trending Movies</h1>
-    <div id="movies"></div> <!-- FILMENE VISER HER -->
+    <!-- 🌙 Dark Mode Toggle -->
+    <div class="dark-mode-container">
+        <label class="switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <h1>MyMovie</h1>
+
+    <!-- 🎬 Now Showing (vandret scroll) -->
+    <h2>Now Showing</h2>
+    <div id="now-showing" class="movie-list horizontal-scroll"></div>
+    
+
+    <!--Popular (vertikal scroll) -->
+    <h2>Popular</h2>
+    <div id="popular" class="movie-list vertical-scroll"></div>
+    
+
+    <!--  Load More -->
+    <button id="load-more">Load More</button>
+
 </body>
 </html>

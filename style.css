@@ -1,2 +1,153 @@
 @import url("/css/fonts.css");
 @import url("/css/navigation.css");
+
+/* GENEREL STYLING */
+body {
+    font-family: "Mulish", sans-serif;
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding: 0;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode .movie-card {
+    background-color: #333 !important;
+    color: white;
+}
+
+.dark-mode .movie-card img {
+    filter: brightness(1);
+}
+
+/*  DARK MODE TOGGLE - RUND SWITCH */
+.dark-mode-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider-knap */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 25px;
+}
+
+/* Hvid cirkel */
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 21px;
+    width: 21px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* Dark Mode */
+input:checked + .slider {
+    background-color: #696262;
+}
+
+input:checked + .slider:before {
+    transform: translateX(25px);
+}
+
+/* Rund stil */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/*  FILM-SEKTIONER */
+h2 {
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+.movie-list {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+}
+
+/* BILLEDER I HORIZONTAL SCROLL** */
+.movie-list.horizontal-scroll img {
+    width: 143px;
+    height: 212px;
+}
+
+.horizontal-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* Skjul scrollbar på Chrome */
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/***NORMAL STØRRELSE I VERTICAL SCROLL** */
+.vertical-scroll {
+    flex-direction: column;
+    overflow-y: auto; 
+    max-height: 80vh; 
+}
+
+.movie-card {
+    width: 143px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.movie-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* 🔄 LOAD MORE-KNAP */
+#load-more {
+    margin: 20px auto;
+    display: block;
+    padding: 10px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}

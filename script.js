@@ -3,9 +3,8 @@ import API_KEY from "./config.js";
 let currentPage = 1;
 let isFetching = false;
 
-/* 🎥 Funktion til at hente film fra API */
-function fetchMovies(endpoint, containerId, append = false) {
-  if (isFetching) return;
+function fetchMovies(endpoint, callback, append = false) {
+  //if (isFetching) return;
   isFetching = true;
 
   fetch(`https://api.themoviedb.org/3/${endpoint}?page=${currentPage}`, {
@@ -16,75 +15,76 @@ function fetchMovies(endpoint, containerId, append = false) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(`Hentet film fra ${endpoint}:`, data);
-
-      let container = document.getElementById(containerId);
-
-      if (!append) {
-        container.innerHTML = ""; // Rens kun ved første load
-      }
-
-      data.results.forEach((movie) => {
-        let movieElement = document.createElement("div");
-        movieElement.classList.add("movie-card");
-
-        movieElement.innerHTML = `
-                <img src="https://image.tmdb.org/t/p/w500${
-                  movie.poster_path
-                }" alt="${movie.title}">
-                <h3>${movie.title}</h3>
-                <p>⭐ ${movie.vote_average.toFixed(1)} / 10</p>
-                <p>🗓 ${movie.release_date}</p>
-            `;
-
-        container.appendChild(movieElement);
-      });
-
+      if (!data.results) return;
+      callback(data.results, append);
       isFetching = false;
     })
-    .catch((error) => {
-      console.error("Fejl ved hentning:", error);
+    .catch(() => {
       isFetching = false;
     });
 }
 
-// 🎬 Loader film fra begge API'er
-fetchMovies("movie/now_playing", "now-showing"); 
-fetchMovies("movie/popular", "popular"); 
+function createMovieElement(movie) {
+  let movieElement = document.createElement("div");
+  movieElement.classList.add("movie-card");
 
-// 🔄 **Infinite Scroll - Læsser flere "popular" film**
-window.addEventListener("scroll", () => {
-  if (
-    window.innerHeight + window.scrollY >= document.body.offsetHeight - 200 &&
-    !isFetching
-  ) {
-    currentPage++;
-    fetchMovies("movie/popular", "popular", true);
-  }
-});
+  movieElement.innerHTML = `
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
+    movie.title
+  }">
+        <h3>${movie.title}</h3>
+        <p>⭐ ${movie.vote_average.toFixed(1)} / 10</p>
+        <p>🗓 ${movie.release_date}</p>
+    `;
 
-// 🎬 Load More-knap (fallback)
-document.getElementById("load-more").addEventListener("click", () => {
-    currentPage++;
-    fetchMovies("movie/popular", "popular", true);
-});
+  movieElement.addEventListener("click", () => showMovieDetails(movie));
 
-// 🌓 **DARK MODE TOGGLE**
-const darkModeToggle = document.getElementById("dark-mode-toggle");
-
-// **Tjek om Dark Mode er aktiveret**
-if (localStorage.getItem("darkMode") === "enabled") {
-  document.body.classList.add("dark-mode");
-  darkModeToggle.checked = true;
+  return movieElement;
 }
 
-// **Event listener for at skifte Dark Mode**
-darkModeToggle.addEventListener("change", () => {
-  document.body.classList.toggle("dark-mode");
+function showMovieDetails(movie) {
+  localStorage.setItem("selectedMovie", JSON.stringify(movie));
+  window.location.href = "movie-detail.html";
+}
 
-  if (document.body.classList.contains("dark-mode")) {
-    localStorage.setItem("darkMode", "enabled");
-  } else {
-    localStorage.setItem("darkMode", "disabled");
+fetchMovies("movie/now_playing", (movies) => {
+    console.log('playing: ', movies);
+    
+  let nowShowingContainer = document.getElementById("now-showing");
+  movies.forEach((movie) =>
+    nowShowingContainer.appendChild(createMovieElement(movie))
+  );
+});
+
+fetchMovies("movie/popular", (movies) => {
+
+    console.log(movies);
+    
+  let popularContainer = document.getElementById("popular");
+  movies.forEach((movie) =>
+    popularContainer.appendChild(createMovieElement(movie))
+  );
+});
+
+window.addEventListener("scroll", function () {
+  let popularContainer = document.getElementById("popular");
+  let body = document.body;
+
+  console.log(body.scrollTop, body.scrollHeight);
+  
+
+  if (
+    body.scrollTop >= body.scrollHeight - 0 && !isFetching
+  ) {
+    currentPage++;
+    fetchMovies(
+      "movie/popular",
+      (movies) => {
+        movies.forEach((movie) =>
+          popularContainer.appendChild(createMovieElement(movie))
+        );
+      },
+      true
+    );
   }
 });

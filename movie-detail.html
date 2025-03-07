@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyMovie</title>
+    <title>Film Detaljer</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer type="module"></script>
+    <script src="movie-detail.js" defer></script>
 </head>
 
 <body>
 
     <div class="header-overlay">
+        <button id="back-button" onclick="goBack()">←</button>
         <div class="dark-mode-container">
             <label class="switch">
                 <input type="checkbox" id="dark-mode-toggle">
@@ -19,13 +20,14 @@
         </div>
     </div>
 
-    <h1>MyMovie</h1>
-
-    <h2>Now Showing</h2>
-    <div id="now-showing" class="movie-list horizontal-scroll"></div>
-
-    <h2>Popular</h2>
-    <div id="popular" class="movie-list vertical-scroll"></div>
+    <div class="movie-detail">
+        <img id="detail-image" src="" alt="">
+        <div class="movie-info">
+            <h2 id="detail-title"></h2>
+            <p id="detail-rating"></p>
+            <p id="detail-description"></p>
+        </div>
+    </div>
 
 </body>
 </html>

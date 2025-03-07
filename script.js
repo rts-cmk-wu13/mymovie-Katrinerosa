@@ -68,13 +68,15 @@ fetchMovies("movie/popular", (movies) => {
 
 window.addEventListener("scroll", function () {
   let popularContainer = document.getElementById("popular");
-  let body = document.body;
+  let scrollTop = window.scrollY;
+  let bodyHeight = window.innerHeight
+  let scrollHeight = document.documentElement.scrollHeight
 
-  console.log(body.scrollTop, body.scrollHeight);
+  console.log(scrollTop + bodyHeight, scrollHeight);
   
 
   if (
-    body.scrollTop >= body.scrollHeight - 0 && !isFetching
+    scrollTop + bodyHeight >= scrollHeight && !isFetching
   ) {
     currentPage++;
     fetchMovies(

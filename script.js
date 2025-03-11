@@ -21,7 +21,7 @@ function fetchMovies(endpoint, callback, append = false) {
     })
     .catch(() => {
       isFetching = false;
-    });
+    });h
 }
 
 function createMovieElement(movie) {
@@ -65,7 +65,7 @@ fetchMovies("movie/popular", (movies) => {
     popularContainer.appendChild(createMovieElement(movie))
   );
 });
-
+//hjææælp//
 window.addEventListener("scroll", function () {
   let popularContainer = document.getElementById("popular");
   let scrollTop = window.scrollY;

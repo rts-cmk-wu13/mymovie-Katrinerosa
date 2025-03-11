@@ -1,14 +1,11 @@
 @import url("/css/fonts.css");
 @import url("/css/navigation.css");
 
-
-
-
 html,
 body {
   min-height: 100vh;
   overflow-y: scroll;
-  
+
   font-family: "Mulish", sans-serif;
   background-color: white;
   color: black;
@@ -32,6 +29,18 @@ body.dark-mode {
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+.playing__img {
+  width: 143px;
+  height: 212px;
+  border-radius: 5%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+.popular__playing__img {
+  width: 85px;
+  height: 128px;
   border-radius: 5px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -107,10 +116,10 @@ input:checked + .slider:before {
   -ms-overflow-style: none;
 }
 
-.movie-list.horizontal-scroll .movie-card img {
+/* img {
   width: 143px;
   height: 212px;
-}
+} */
 
 .movie-list.vertical-scroll {
   display: flex;
@@ -143,17 +152,19 @@ input:checked + .slider:before {
 
 .close {
   position: absolute;
-  top: 10px;
+
   right: 15px;
   font-size: 24px;
   cursor: pointer;
 }
 
 #detail-image {
-  width: 100%;
-  height: 50vh;
+  width: 375px;
+  max-height: 500px;
   object-fit: cover;
-  visibility: hidden;
+  top: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 #detail-image.loaded {
@@ -161,18 +172,18 @@ input:checked + .slider:before {
 }
 
 .header-overlay {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   z-index: 10;
+  padding: 10px;
 }
 
 #back-button {
   background: none;
+  text-align: left;
+  justify-self: flex-start;
+  align-items: start;
   color: white;
   border: none;
   font-size: 32px;
@@ -181,4 +192,29 @@ input:checked + .slider:before {
 
 body.dark-mode #back-button {
   color: #ccc;
+}
+.movie-info {
+  text-align: left;
+  padding: 20px;
+}
+
+#detail-title {
+  font-size: 2rem;
+  font-family: "Mulish";
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#detail-description {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+#detail-rating {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: gold;
+  padding: 20px;
 }

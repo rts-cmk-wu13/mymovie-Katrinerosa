@@ -5,6 +5,137 @@ html,
 body {
   min-height: 100vh;
   overflow-y: scroll;
+  font-family: "Mulish", sans-serif;
+  background-color: white;
+  color: #1e1e1e;
+  margin: 0;
+  padding: 0;
+  transition: background 0.3s, color 0.3s;
+}
+
+/*dark mode*/
+body.dark-mode {
+  background-color: #000;
+  color: white;
+}
+
+/* Filmkort & billeder i Dark Mode.. jeg gentager sikkert mig selv men jeg tør ikke slette noget */
+body.dark-mode .movie-card img,
+body.dark-mode .playing__img,
+body.dark-mode .popular__playing__img {
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Gør tekst og overskrifter lysere i Dark Mode */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode p {
+  color: white;
+}
+
+/* Dark Mode baggrund for filmcontainer */
+body.dark-mode .movie-list {
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+.dark-mode-container {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 10;
+  display: flex;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 25px;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #696262;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+/* Now playing" */
+.playing__img {
+  width: 143px;
+  height: 212px;
+  border-radius: 5%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/*"Popular" */
+.popular__playing__img {
+  width: 85px;
+  height: 128px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Filmkort */
+.movie-list {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+}
+
+.movie-list.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* .movie-list.vertical-scroll {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-bottom: 20px;
+} */
+
+html,
+body {
+  min-height: 100vh;
+  overflow-y: scroll;
 
   font-family: "Mulish", sans-serif;
   background-color: white;
@@ -14,9 +145,67 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
-body.dark-mode {
-  background-color: #121212;
+/* pics Dark Mode */
+body.dark-mode .movie-card img,
+body.dark-mode .playing__img,
+body.dark-mode .popular__playing__img {
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Gør tekst og overskrifter lysere i Dark Mode */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode p {
   color: white;
+}
+
+/* baggrund for filmcontainer */
+body.dark-mode .movie-list {
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Dark Mode Switch */
+.dark-mode-container {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 10;
+  display: flex;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #696262;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
 }
 
 .movie-card {
@@ -25,19 +214,22 @@ body.dark-mode {
   max-width: 150px;
 }
 
-.movie-card img {
+/* /* .movie-card img {
   width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 5px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-}
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); */
+
+/* Billeder fra "Now Showing" */
 .playing__img {
   width: 143px;
   height: 212px;
   border-radius: 5%;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+
 .popular__playing__img {
   width: 85px;
   height: 128px;
@@ -102,36 +294,24 @@ input:checked + .slider:before {
   transform: translateX(18px);
 }
 
-.movie-list {
-  display: flex;
-  gap: 15px;
-  padding: 10px;
-}
 
-.movie-list.horizontal-scroll {
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-/* img {
-  width: 143px;
-  height: 212px;
-} */
 
 .movie-list.vertical-scroll {
   display: flex;
-  flex-direction: column;
-  overflow-y: auto;
+  flex-direction: column; 
+  overflow-y: auto; 
+  /* max-height: 80vh;  */
   padding-bottom: 20px;
 }
 
-.modal {
+img {
+  width: 143px;
+  height: 212px;
+}
+
+/* .modal {
   display: none;
-  position: fixed;
-  z-index: 1000;
+
   left: 0;
   top: 0;
   width: 100%;
@@ -149,7 +329,7 @@ input:checked + .slider:before {
   max-width: 500px;
   position: relative;
 }
-
+ */
 .close {
   position: absolute;
 
@@ -171,27 +351,37 @@ input:checked + .slider:before {
   visibility: visible;
 }
 
-.header-overlay {
+/* .header-overlay {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   z-index: 10;
+  padding: 10px;
+} */
+
+.header-overlay {
+  display: flex;
+  justify-content: space-between; /* Sørger for, at elementer er i hver sin side */
+  align-items: center;
+  /* z-index: 10; */
   padding: 10px;
 }
 
 #back-button {
   background: none;
   text-align: left;
-  justify-self: flex-start;
-  align-items: start;
-  color: white;
+  color: black; /* Gør knappen sort */
   border: none;
   font-size: 32px;
   cursor: pointer;
+  position: absolute;
+  left: 15px; /* Placerer den i venstre side */
 }
 
 body.dark-mode #back-button {
   color: #ccc;
+  justify-self: flex-start;
+  align-items: start;
 }
 .movie-info {
   text-align: left;
@@ -202,14 +392,22 @@ body.dark-mode #back-button {
   font-size: 2rem;
   font-family: "Mulish";
   font-weight: bold;
+  text-align: start;
   margin-bottom: 10px;
+  text-align: left;
+    justify-content: flex-start;
 }
 
+#detail-title h2{
+    /* text-align: left; */
+    justify-content: flex-start;
+}
 #detail-description {
   font-size: 1.2rem;
-  color: #555;
+  text-align: left;
+  padding-left: 10px;
   max-width: 80%;
-  margin: 0 auto;
+  
 }
 
 #detail-rating {
@@ -217,4 +415,54 @@ body.dark-mode #back-button {
   font-weight: bold;
   color: gold;
   padding: 20px;
+  text-align: start;
 }
+/* .cast-list {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+} */
+
+/* .actor {
+  width: 745px;
+  text-align: center;
+}
+ */
+.actor img {
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+/* .movie-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding: 20px;
+}
+ */
+.movie-info {
+  max-width: 600px;
+  text-align: center;
+  color: #fff;
+}
+
+.cast-list {
+  display: flex;
+  gap: 15px;
+  justify-content: space-around;
+  /* flex-wrap: wrap; */
+}
+
+
+
+/* .actor img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+ */

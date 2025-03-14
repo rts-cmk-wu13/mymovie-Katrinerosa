@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Detaljer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="movie-detail.js" defer></script>
+</head>
+
+<body>
+    
+
+    <div class="header-overlay">
+        <button id="back-button" onclick="goBack()">←</button>
+        <div class="dark-mode-container">
+            <label class="switch">
+                <input type="checkbox" id="dark-mode-toggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="movie-detail">
+        <img id="detail-image" src="" alt="">
+        <div class="movie-info">
+            <h2 id="detail-title"></h2>
+            <p id="detail-rating"></p>
+            <p id="detail-description"></p>
+
+           
+            <h3>Genre:</h3>
+            <p id="detail-genres"></p>
+
+            <h3>Cast:</h3>
+            <div id="detail-cast" class="cast-list"></div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

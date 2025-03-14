@@ -1,4 +1,4 @@
-const API_KEY = "3021a3346474c349906d556b919dc393"; // Skift til din gyldige API-nøgle
+const API_KEY = "3021a3346474c349906d556b919dc393"; // Skift til gyldige API-nøgle
 const API_URL = "https://api.themoviedb.org/3";
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -33,10 +33,10 @@ function fetchMovieDetails(movieId) {
       imageElement.src = movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : "fallback-image.jpg";
       imageElement.alt = movie.title;
 
-      //  Vis genre
+      // ---> genre
       document.getElementById("detail-genres").textContent = movie.genres.map(genre => genre.name).join(", ");
 
-      // Hent skuespillere
+      // skuespillere
       fetchMovieCast(movieId);
     })
     .catch((error) => {
@@ -44,7 +44,7 @@ function fetchMovieDetails(movieId) {
     });
 }
 
-// Funktion til at hente skuespillere (cast)
+// ---->(cast)
 function fetchMovieCast(movieId) {
   fetch(`${API_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`)
     .then((response) => response.json())
@@ -68,12 +68,12 @@ function fetchMovieCast(movieId) {
     .catch(error => console.error(" Fejl ved hentning af cast:", error));
 }
 
-//  Funktion til tilbage-knap
+// tilbage-knap
 function goBack() {
   history.back();
 }
 
-// Dark Mode håndtering
+// Dark Mode
 document.addEventListener("DOMContentLoaded", function () {
     const darkModeToggle = document.getElementById("dark-mode-toggle");
 
@@ -93,6 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Start filmhentning
+// -->filmhentning
 const movieId = getMovieIdFromUrl();
 fetchMovieDetails(movieId);
